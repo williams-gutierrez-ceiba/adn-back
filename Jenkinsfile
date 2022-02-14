@@ -45,8 +45,8 @@ pipeline {
       steps{
           echo '------------>Análisis de código estático<------------'
           sonarqubeMasQualityGatesP(sonarKey:'co.com.ceiba.adn:reserva.viviendas-williams.gutierrez',
-          sonarName:'ReservaViviendas(williams.gutierrez)',
-          sonarPathProperties:'./sonar-project.properties')
+                                      sonarName:'ReservaViviendas(williams.gutierrez)',
+                                      sonarPathProperties:'./sonar-project.properties')
       }
     }
 
