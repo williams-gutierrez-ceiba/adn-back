@@ -1,0 +1,21 @@
+jasypt:
+   encryptor:
+      password: ${jasyptpwd:secretkey}
+      algorithm: PBEWithMD5AndDES
+
+server:
+   port: 8082
+   servlet:
+      context-path: /archivos
+      session:
+         timeout: 21600s
+
+spring:
+   datasource:
+      driver-class-name: org.h2.Driver
+      type: com.zaxxer.hikari.HikariDataSource
+      jdbcUrl: jdbc:h2:mem:~/adn
+      username: admin
+      password: admin
+      hikari:
+         poolName: pool

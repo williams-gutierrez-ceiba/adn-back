@@ -1,0 +1,2 @@
+INSERT INTO USUARIO (TELEFONO_CELULAR, NOMBRES, APELLIDOS, CORREO_ELECTRONICO, TIPO_DOCUMENTO, NUMERO_DOCUMENTO)
+    VALUES (:telefonoCelular, :nombres, :apellidos, :correoElectronico, :tipoDocumento, :numeroDocumento)

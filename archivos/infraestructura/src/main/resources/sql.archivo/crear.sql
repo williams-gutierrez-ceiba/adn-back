@@ -1,0 +1,1 @@
+insert into archivo (vivienda_id, ruta) values (:viviendaId, :ruta)
