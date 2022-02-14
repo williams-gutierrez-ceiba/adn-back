@@ -54,10 +54,13 @@ class ServicioCrearReservaTest {
                 repositorioReserva,
                 servicioValidarDisponibilidadVivienda,
                 servicioCalcularValorTotalReserva);
-        // act - assert
+
+        // act
         Long idReserva = servicioCrearReserva.ejecutar(reserva);
+
         // assert
-        assertEquals(10L, idReserva);
         Mockito.verify(repositorioReserva, Mockito.times(1)).crear(reserva);
+        //TODO: Verificar todos los mocks
+        assertEquals(10L, idReserva);
     }
 }
