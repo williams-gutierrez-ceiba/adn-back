@@ -5,7 +5,8 @@ import java.time.LocalDate;
 
 public class LocalDateUtil {
 
-    private LocalDateUtil() {
+    public LocalDateUtil() throws IllegalAccessException {
+        throw new IllegalAccessException("Clase utilitaria");
     }
 
     public static int calcularDiasDeFinDeSemanaEntreFechas(LocalDate inicio, LocalDate fin) {
