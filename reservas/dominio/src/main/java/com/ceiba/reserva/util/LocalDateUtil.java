@@ -5,6 +5,9 @@ import java.time.LocalDate;
 
 public class LocalDateUtil {
 
+    private LocalDateUtil() {
+    }
+
     public static int calcularDiasDeFinDeSemanaEntreFechas(LocalDate inicio, LocalDate fin) {
         int diasFinDeSemana = 0;
         LocalDate fechaFin = fin.plusDays(1);

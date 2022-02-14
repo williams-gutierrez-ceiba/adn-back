@@ -63,7 +63,9 @@ public class RepositorioReservaMysql implements RepositorioReserva {
 
     @Override
     public boolean existe(Long id) {
-        if (id==null) return false;
+        if (id==null) {
+            return false;
+        }
         MapSqlParameterSource paramSource = new MapSqlParameterSource();
         paramSource.addValue("id", id);
         return this.customNamedParameterJdbcTemplate

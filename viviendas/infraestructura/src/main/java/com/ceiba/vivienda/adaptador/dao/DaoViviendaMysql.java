@@ -1,7 +1,6 @@
 package com.ceiba.vivienda.adaptador.dao;
 
 import com.ceiba.infraestructura.jdbc.CustomNamedParameterJdbcTemplate;
-import com.ceiba.infraestructura.jdbc.sqlstatement.SqlStatement;
 import com.ceiba.vivienda.modelo.dto.DtoVivienda;
 import com.ceiba.vivienda.puerto.dao.DaoVivienda;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -14,11 +13,9 @@ public class DaoViviendaMysql implements DaoVivienda {
 
     private final CustomNamedParameterJdbcTemplate customNamedParameterJdbcTemplate;
 
-//    @SqlStatement(namespace="usuario", value="listar")
     private static String sqlListar = "select id,tipo_vivienda_id,aire_acondicionado,mascotas,calefaccion," +
             "numero_habitaciones,numero_banios,numero_personas,ciudad,departamento from vivienda";
-
-//    private static String sqlConsultarPorId = "select count(1) from vivienda where id = :id";
+    
     private static String sqlConsultarPorId = "select id,tipo_vivienda_id,aire_acondicionado,mascotas,calefaccion," +
         "numero_habitaciones,numero_banios,numero_personas,ciudad,departamento from vivienda where id = :id";
 
