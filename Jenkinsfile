@@ -1,32 +1,20 @@
-@Library('ceiba-jenkins-library') _
+@Library('ceiba-jenkins-library')_
+
 pipeline {
-  //Donde se va a ejecutar el Pipeline
   agent {
     label 'Slave_Induccion'
   }
 
-  //Opciones específicas de Pipeline dentro del Pipeline
+
   options {
-        buildDiscarder(logRotator(numToKeepStr: '3'))
-        disableConcurrentBuilds()
+	buildDiscarder(logRotator(numToKeepStr: '3'))
+ 	disableConcurrentBuilds()
   }
 
-  //Una sección que define las herramientas “preinstaladas” en Jenkins
   tools {
-    jdk 'JDK8_Centos' //Verisión preinstalada en la Configuración del Master
+    jdk 'JDK8_Centos'
   }
-/*    Versiones disponibles
-      JDK8_Mac
-      JDK6_Centos
-      JDK7_Centos
-      JDK8_Centos
-      JDK10_Centos
-      JDK11_Centos
-      JDK13_Centos
-      JDK14_Centos
-*/
 
-  //Aquí comienzan los “items” del Pipeline
   stages{
     stage('Checkout') {
       steps{
@@ -38,25 +26,46 @@ pipeline {
     stage('Compile & Unit Tests') {
       steps{
         echo "------------>Compile & Unit Tests<------------"
-        sh 'chmod +x gradlew'
-        sh './gradlew --b ./build.gradle test'
+        sh 'chmod +x ./archivos/gradlew'
+        sh './archivos/gradlew --b ./archivos/build.gradle clean'
+        sh './archivos/gradlew --b ./archivos/build.gradle test'
+        sh 'chmod +x ./microservicio/gradlew'
+        sh './microservicio/gradlew --b ./microservicio/build.gradle clean'
+        sh './microservicio/gradlew --b ./microservicio/build.gradle test'
+        sh 'chmod +x ./reservas/gradlew'
+        sh './reservas/gradlew --b ./reservas/build.gradle clean'
+        sh './reservas/gradlew --b ./reservas/build.gradle test'
+        sh 'chmod +x ./viviendas/gradlew'
+        sh './viviendas/gradlew --b ./viviendas/build.gradle clean'
+        sh './viviendas/gradlew --b ./viviendas/build.gradle test'
       }
     }
 
     stage('Static Code Analysis') {
-        steps{
-            sonarqubeMasQualityGatesP(sonarKey:'co.com.ceiba.adn:reserva.viviendas-williams.gutierrez',
-            sonarName:'ReservaViviendas(williams.gutierrez)',
-            sonarPathProperties:'./sonar-project.properties')
-        }
+      steps{
+          echo '------------>Análisis de código estático<------------'
+          sonarqubeMasQualityGatesP(sonarKey:'co.com.ceiba.adn:reserva.viviendas-williams.gutierrez',
+          sonarName:'ReservaViviendas(williams.gutierrez)',
+          sonarPathProperties:'./sonar-project.properties')
+      }
     }
 
 
     stage('Build') {
       steps {
         echo "------------>Build<------------"
-        //Construir sin tarea test que se ejecutó previamente
-        sh './gradlew --b ./build.gradle build -x test'
+        sh 'chmod +x ./archivos/gradlew'
+        sh './archivos/gradlew --b ./archivos/build.gradle clean'
+        sh './archivos/gradlew --b ./archivos/build.gradle -x test'
+        sh 'chmod +x ./microservicio/gradlew'
+        sh './microservicio/gradlew --b ./microservicio/build.gradle clean'
+        sh './microservicio/gradlew --b ./microservicio/build.gradle build -x test'
+        sh 'chmod +x ./reservas/gradlew'
+        sh './reservas/gradlew --b ./reservas/build.gradle clean'
+        sh './reservas/gradlew --b ./reservas/build.gradle -x test'
+        sh 'chmod +x ./viviendas/gradlew'
+        sh './viviendas/gradlew --b ./viviendas/build.gradle clean'
+        sh './viviendas/gradlew --b ./viviendas/build.gradle -x test'
       }
     }
   }
@@ -67,6 +76,7 @@ pipeline {
     }
     success {
       echo 'This will run only if successful'
+      junit 'microservicio/build/test-results/test/*.xml'
     }
     failure {
       echo 'This will run only if failed'
