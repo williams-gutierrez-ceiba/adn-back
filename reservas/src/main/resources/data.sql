@@ -7,7 +7,10 @@ insert into vivienda (tipo_vivienda_id, ciudad, departamento, aire_acondicionado
 insert into vivienda (tipo_vivienda_id, ciudad, departamento, aire_acondicionado, mascotas, calefaccion, numero_banios, numero_personas, numero_habitaciones) values (2, 'Girardot', 'Cundinamarca', 1, 1, 1, 2, 4, 2);
 
 insert into usuario (telefono_celular, nombres, apellidos, correo_electronico, tipo_documento, numero_documento)
-    values ('32145', '1231321', '1321231', 'kjsdhfjkshfd', 'cc', 'lkj');
+    values ('32145', 'Juan', 'Pérez', 'test@test.com', 'CC', '1025639260');
+
+insert into usuario (telefono_celular, nombres, apellidos, correo_electronico, tipo_documento, numero_documento)
+    values ('3125259929', 'Williams', 'Gutiérrez', 'test@test.com', 'CC', '1025639260');
 
 insert into reserva (usuario_id, vivienda_id, fecha_inicio, fecha_fin, valor_parcial, valor_total)
     values ('32145', 1, '2022-10-15', '2022-10-20', 200000, 1000000);
